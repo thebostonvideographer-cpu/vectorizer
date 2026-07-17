@@ -1,4 +1,10 @@
 import { removeBackground } from "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/+esm";
+import {
+  openFullEditor,
+  blobToBase64,
+  base64ToBlob,
+  getAdobeConfig,
+} from "./adobe-express.js";
 
 const dropzone = document.getElementById("dropzone");
 const fileInput = document.getElementById("file-input");
@@ -11,6 +17,7 @@ const resultPreview = document.getElementById("result-preview");
 const downloadBtn = document.getElementById("download-btn");
 const replaceBtn = document.getElementById("replace-btn");
 const processBtn = document.getElementById("process-btn");
+const adobeBtn = document.getElementById("adobe-btn");
 const statusEl = document.getElementById("status");
 const modeEl = document.getElementById("mode");
 const toleranceEl = document.getElementById("tolerance");
@@ -21,7 +28,7 @@ let currentFile = null;
 let sourceUrl = null;
 let resultUrl = null;
 let resultBlob = null;
-let baseName = "cutout";
+let baseName = "trace";
 let busy = false;
 
 function setStatus(text, kind = "") {
@@ -257,6 +264,60 @@ function showResult(blob) {
   img.style.display = "block";
   resultPreview.replaceChildren(img);
   downloadBtn.disabled = false;
+  adobeBtn.disabled = false;
+}
+
+async function openInAdobeExpress() {
+  const source = resultBlob || currentFile;
+  if (!source) {
+    setStatus("Process or upload an image first.", "error");
+    return;
+  }
+
+  const { clientId } = getAdobeConfig();
+  if (!clientId || clientId === "YOUR_ID") {
+    setStatus(
+      "Add your Adobe clientId in adobe-config.js, allow-list this HTTPS domain, then redeploy.",
+      "error"
+    );
+    return;
+  }
+
+  if (location.protocol !== "https:" && location.hostname !== "localhost") {
+    setStatus("Adobe Express requires HTTPS (Cloudflare deploy is fine).", "error");
+    return;
+  }
+
+  busy = true;
+  adobeBtn.disabled = true;
+  processBtn.disabled = true;
+  setStatus("Opening Adobe Express Full Editor…", "busy");
+
+  try {
+    const base64 = await blobToBase64(source);
+    await openFullEditor(base64, {
+      onSave: async ({ base64: outBase64 }) => {
+        const blob = base64ToBlob(outBase64, "image/png");
+        showResult(blob);
+        setStatus(`Saved from Adobe Express · ${formatBytes(blob.size)}`);
+      },
+      onCancel: () => {
+        setStatus("Adobe Express closed without saving.");
+      },
+      onError: (err) => {
+        console.error(err);
+        setStatus(err.message || "Adobe Express error.", "error");
+      },
+    });
+    setStatus("Edit in Adobe Express — Save to bring the PNG back here.", "busy");
+  } catch (err) {
+    console.error(err);
+    setStatus(err.message || "Could not open Adobe Express.", "error");
+  } finally {
+    busy = false;
+    adobeBtn.disabled = !resultBlob && !currentFile;
+    processBtn.disabled = false;
+  }
 }
 
 async function loadFile(file) {
@@ -268,13 +329,14 @@ async function loadFile(file) {
   currentFile = file;
   revoke(sourceUrl);
   sourceUrl = URL.createObjectURL(file);
-  baseName = (file.name || "cutout").replace(/\.[^.]+$/, "") || "cutout";
+  baseName = (file.name || "trace").replace(/\.[^.]+$/, "") || "trace";
 
   fileNameEl.textContent = file.name || "Untitled";
   fileSizeEl.textContent = formatBytes(file.size);
   sourcePreview.src = sourceUrl;
   resultPreview.replaceChildren();
   downloadBtn.disabled = true;
+  adobeBtn.disabled = true;
   showWorkspace();
   await processCurrent();
 }
@@ -386,6 +448,12 @@ sampleBtn.addEventListener("click", () => {
 replaceBtn.addEventListener("click", () => fileInput.click());
 downloadBtn.addEventListener("click", downloadPng);
 processBtn.addEventListener("click", () => processCurrent());
+adobeBtn.addEventListener("click", () => {
+  openInAdobeExpress().catch((err) => {
+    console.error(err);
+    setStatus(err.message || "Could not open Adobe Express.", "error");
+  });
+});
 modeEl.addEventListener("change", () => {
   syncModeUi();
   if (currentFile) processCurrent();

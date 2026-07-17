@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <script src="./adobe-config.js"></script>
   </head>
   <body>
     <div class="atmosphere" aria-hidden="true"></div>
@@ -91,6 +92,13 @@
             <button type="button" class="btn primary full" id="process-btn">
               Remove background again
             </button>
+            <button type="button" class="btn ghost full" id="adobe-btn" disabled>
+              Fine-tune in Adobe Express
+            </button>
+            <p class="hint adobe-hint">
+              Opens Full Editor: Remove Background, then Erase/Restore for text.
+              Sign-in only when you Save.
+            </p>
             <p class="status" id="status">Ready</p>
           </aside>
 

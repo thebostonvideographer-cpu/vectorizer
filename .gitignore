@@ -6,4 +6,9 @@ dist/
 *.zip
 vectorizer-deploy.zip
 .dev.vars
-.venv
+crop-*.jpg
+crop-*.png
+debug-*.png
+preview-*.jpg
+preview-*.png
+verify-*.png
