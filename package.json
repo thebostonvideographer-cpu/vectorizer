@@ -8,6 +8,7 @@
     "dev": "npx --yes serve dist -l 8080",
     "predev": "npm run build",
     "build": "node scripts/build.mjs",
+    "deploy": "npm run build && npx --yes wrangler deploy",
     "start": "npm run dev"
   },
   "engines": {
