@@ -1,0 +1,4 @@
+# Copy to .dev.vars for local `wrangler dev`
+# Get keys at https://vectorizer.ai/api
+VECTORIZER_API_ID=your_api_id
+VECTORIZER_API_SECRET=your_api_secret

@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trace — Image to Vector</title>
+    <title>Trace — Background Remover</title>
     <meta
       name="description"
-      content="Convert JPEG and PNG images into editable SVG vectors in your browser."
+      content="Remove image backgrounds in your browser. Download a transparent PNG for logos, products, and portraits."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,16 +21,16 @@
 
     <header class="top">
       <a class="brand" href="./">Trace</a>
-      <p class="tag">Raster → SVG, entirely in your browser</p>
+      <p class="tag">Background out · transparent PNG in</p>
     </header>
 
     <main class="shell">
       <section class="hero" id="dropzone" tabindex="0">
         <div class="hero-copy">
-          <h1>Drop a JPEG.<br />Get a vector.</h1>
+          <h1>Drop a photo.<br />Lose the background.</h1>
           <p>
-            Upload a logo, icon, or flat graphic. Trace converts it to an editable
-            SVG you can download and use anywhere.
+            Instant cutouts for logos, products, and people. Runs in your browser —
+            free, private, and ready to download as a PNG with transparency.
           </p>
           <div class="cta-row">
             <label class="btn primary" for="file-input">Choose image</label>
@@ -38,9 +38,9 @@
               Try sample
             </button>
           </div>
-          <p class="hint">JPEG, PNG, or WebP · processed locally · nothing uploaded</p>
+          <p class="hint">JPEG, PNG, or WebP · processed on your device · nothing uploaded</p>
         </div>
-        <div class="hero-stage" id="hero-stage">
+        <div class="hero-stage">
           <div class="drop-frame">
             <span class="drop-label">Drop image here</span>
           </div>
@@ -60,68 +60,24 @@
             <span id="file-size"></span>
           </div>
           <div class="bar-actions">
-            <button type="button" class="btn ghost" id="replace-btn">
-              Replace
-            </button>
+            <button type="button" class="btn ghost" id="replace-btn">Replace</button>
             <button type="button" class="btn primary" id="download-btn" disabled>
-              Download SVG
+              Download PNG
             </button>
           </div>
         </div>
 
-        <div class="panels">
+        <div class="panels panels-simple">
           <aside class="controls">
-            <h2>Settings</h2>
-
-            <label class="field">
-              <span>Preset</span>
-              <select id="preset">
-                <option value="exact" selected>Exact match</option>
-                <option value="logo">Logo (smooth)</option>
-                <option value="balanced">Balanced</option>
-                <option value="photo">Photo</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <span>Curve mode</span>
-              <select id="mode">
-                <option value="pixel" selected>Pixel (closest match)</option>
-                <option value="spline">Spline (smooth)</option>
-                <option value="polygon">Polygon</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <span>Color accuracy <em id="color-val">8</em></span>
-              <input id="color" type="range" min="1" max="8" step="1" value="8" />
-            </label>
-
-            <label class="field">
-              <span>Filter speckle <em id="speckle-val">0</em></span>
-              <input id="speckle" type="range" min="0" max="16" step="1" value="0" />
-            </label>
-
-            <label class="field">
-              <span>Layer difference <em id="layer-val">0</em></span>
-              <input id="layer" type="range" min="0" max="64" step="1" value="0" />
-            </label>
-
-            <label class="field">
-              <span>Corner threshold <em id="corner-val">180°</em></span>
-              <input id="corner" type="range" min="0" max="180" step="1" value="180" />
-            </label>
-
-            <label class="field check">
-              <input id="solid-bg" type="checkbox" checked />
-              <span>Solid white preview</span>
-            </label>
-
-            <button type="button" class="btn primary full" id="trace-btn">
-              Trace again
+            <h2>Cutout</h2>
+            <p class="controls-copy">
+              We detect the subject and punch out the background. Perfect when you
+              just need a clean transparent file for web, ads, or design tools.
+            </p>
+            <button type="button" class="btn primary full" id="process-btn">
+              Remove background again
             </button>
-
-            <p class="status" id="status">Loading engine…</p>
+            <p class="status" id="status">Ready</p>
           </aside>
 
           <div class="previews">
@@ -132,8 +88,8 @@
               </div>
             </figure>
             <figure class="preview">
-              <figcaption>Vector</figcaption>
-              <div class="frame solid" id="svg-preview"></div>
+              <figcaption>Transparent PNG</figcaption>
+              <div class="frame checker" id="result-preview"></div>
             </figure>
           </div>
         </div>
@@ -142,8 +98,8 @@
 
     <footer class="foot">
       <p>
-        Powered by VTracer in your browser. Use <strong>Exact match</strong> for
-        logos that need to look identical — slower, larger SVG, closest fidelity.
+        Free in-browser AI background removal. First run downloads a small model;
+        after that it’s fast and stays on your device.
       </p>
     </footer>
 

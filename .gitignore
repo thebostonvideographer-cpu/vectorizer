@@ -5,3 +5,5 @@ dist/
 *.log
 *.zip
 vectorizer-deploy.zip
+.dev.vars
+.venv

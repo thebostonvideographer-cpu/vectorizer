@@ -1,8 +1,8 @@
 {
-  "name": "trace-vectorizer",
-  "version": "1.0.0",
+  "name": "trace-cutout",
+  "version": "2.0.0",
   "private": true,
-  "description": "Browser-based JPEG/PNG → SVG vectorizer (VTracer)",
+  "description": "Free in-browser background remover → transparent PNG",
   "type": "module",
   "scripts": {
     "dev": "npx --yes serve dist -l 8080",

@@ -239,6 +239,23 @@ body {
   align-items: start;
 }
 
+.panels-simple {
+  grid-template-columns: 260px 1fr;
+}
+
+.controls-copy {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.engine-note {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
 .controls {
   position: sticky;
   top: 1rem;
@@ -255,6 +272,16 @@ body {
   font-family: var(--font-display);
   font-size: 1.35rem;
   letter-spacing: -0.02em;
+}
+
+.controls-copy {
+  margin: 0 0 1.1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.panels-simple {
+  grid-template-columns: 260px 1fr;
 }
 
 .field {
