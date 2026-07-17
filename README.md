@@ -32,17 +32,10 @@ Open [http://localhost:8080](http://localhost:8080).
 
 Or push to GitHub — Cloudflare Pages/Workers with assets will pick it up.
 
-Live Worker URL (after deploy): still named `vectorizer` on Cloudflare for now  
-(e.g. `https://vectorizer.…workers.dev`) — UI brand is **Trace**; rename the URL later if you want.
-
-## Adobe Express (optional fine-tune)
-
-1. Set `clientId` in `adobe-config.js`
-2. Allow-list your HTTPS Worker origin in Adobe Developer Console
-3. Redeploy — use **Fine-tune in Adobe Express** after a cutout
+Live Worker URL (after deploy): your `*.workers.dev` domain.
 
 ## Notes
 
 - First run downloads a model (~few MB); later runs are faster (browser cache)
 - Best on people, products, logos on plain/busy backgrounds
-- Tough edges: use Adobe Express Erase/Restore, then Save back into Trace
+- Hair/fine edges are usually good; tough cases may need a touch-up in Photoshop

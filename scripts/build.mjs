@@ -16,6 +16,7 @@ writeFileSync(
   join(dist, "_headers"),
   `/*
   X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
 `
 );
 

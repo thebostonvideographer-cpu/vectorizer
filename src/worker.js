@@ -67,7 +67,6 @@ async function handleVectorize(request, env) {
 
   const creditsCharged = upstream.headers.get("X-Credits-Charged") || "";
   const creditsCalculated = upstream.headers.get("X-Credits-Calculated") || "";
-  const imageToken = upstream.headers.get("X-Image-Token") || "";
 
   if (!upstream.ok) {
     const detail = await upstream.text();
@@ -85,7 +84,6 @@ async function handleVectorize(request, env) {
       "cache-control": "no-store",
       "x-credits-charged": creditsCharged,
       "x-credits-calculated": creditsCalculated,
-      ...(imageToken ? { "x-image-token": imageToken } : {}),
     },
   });
 }
