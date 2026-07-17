@@ -29,8 +29,8 @@
         <div class="hero-copy">
           <h1>Drop a photo.<br />Lose the background.</h1>
           <p>
-            Instant cutouts for logos, products, and people. Runs in your browser —
-            free, private, and ready to download as a PNG with transparency.
+            Clean cutouts for logos and photos. Runs in your browser — free,
+            private, and ready to download as a PNG with transparency.
           </p>
           <div class="cta-row">
             <label class="btn primary" for="file-input">Choose image</label>
@@ -71,9 +71,23 @@
           <aside class="controls">
             <h2>Cutout</h2>
             <p class="controls-copy">
-              We detect the subject and punch out the background. Perfect when you
-              just need a clean transparent file for web, ads, or design tools.
+              Use <strong>Logo</strong> for white/solid backgrounds (keeps text
+              solid). Use <strong>Photo</strong> for people and products.
             </p>
+
+            <label class="field">
+              <span>Mode</span>
+              <select id="mode">
+                <option value="logo" selected>Logo (solid background)</option>
+                <option value="photo">Photo (AI cutout)</option>
+              </select>
+            </label>
+
+            <label class="field" id="tolerance-field">
+              <span>Background tolerance <em id="tolerance-val">36</em></span>
+              <input id="tolerance" type="range" min="8" max="80" step="1" value="36" />
+            </label>
+
             <button type="button" class="btn primary full" id="process-btn">
               Remove background again
             </button>
@@ -98,8 +112,8 @@
 
     <footer class="foot">
       <p>
-        Free in-browser AI background removal. First run downloads a small model;
-        after that it’s fast and stays on your device.
+        Logo mode punches out connected background from the edges — best for
+        brand marks. Photo mode uses on-device AI for complex scenes.
       </p>
     </footer>
 
