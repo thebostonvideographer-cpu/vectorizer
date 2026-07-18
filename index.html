@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Trace — Background Remover</title>
-    <script src="./adobe-config.js"></script>
     <meta
       name="description"
       content="Remove image backgrounds in your browser. Download a transparent PNG for logos, products, and portraits."
@@ -73,8 +71,8 @@
           <aside class="controls">
             <h2>Cutout</h2>
             <p class="controls-copy">
-              <strong>Logo</strong>: solid backgrounds + Keep/Cut marks.
-              <strong>Photo</strong>: AI for people and products.
+              Use <strong>Logo</strong> for white/solid backgrounds (keeps text
+              solid). Use <strong>Photo</strong> for people and products.
             </p>
 
             <label class="field">
@@ -86,63 +84,21 @@
             </label>
 
             <label class="field" id="tolerance-field">
-              <span>Background tolerance <em id="tolerance-val">42</em></span>
-              <input id="tolerance" type="range" min="8" max="90" step="1" value="42" />
+              <span>Background tolerance <em id="tolerance-val">36</em></span>
+              <input id="tolerance" type="range" min="8" max="80" step="1" value="36" />
             </label>
-
-            <label class="field" id="scale-field">
-              <span>Edge quality</span>
-              <select id="supersample">
-                <option value="2" selected>2× smooth (faster)</option>
-                <option value="4">4× ultra smooth</option>
-                <option value="6">6× max smooth</option>
-              </select>
-            </label>
-
-            <div class="guide-tools" id="guide-tools">
-              <h3>Guide marks</h3>
-              <p class="controls-copy">
-                Green Keep on faces / light text (scribble fills the area).
-                Red Cut on background. Edges are hard-cut to kill white halos.
-              </p>
-              <div class="brush-row">
-                <button type="button" class="btn brush keep active" id="brush-keep" data-brush="keep">
-                  Keep
-                </button>
-                <button type="button" class="btn brush cut" id="brush-cut" data-brush="cut">
-                  Cut
-                </button>
-                <button type="button" class="btn brush erase" id="brush-erase" data-brush="erase">
-                  Erase
-                </button>
-              </div>
-              <label class="field">
-                <span>Brush size <em id="brush-size-val">24</em></span>
-                <input id="brush-size" type="range" min="4" max="80" step="1" value="24" />
-              </label>
-              <button type="button" class="btn ghost full" id="clear-marks-btn">
-                Clear marks
-              </button>
-            </div>
 
             <button type="button" class="btn primary full" id="process-btn">
               Remove background again
             </button>
-            <button type="button" class="btn ghost full" id="adobe-btn" disabled>
-              Fine-tune in Adobe Express
-            </button>
-            <p class="hint adobe-hint">
-              Opens Full Editor for Remove Background / Erase-Restore. Sign-in on Save.
-            </p>
             <p class="status" id="status">Ready</p>
           </aside>
 
           <div class="previews">
             <figure class="preview">
-              <figcaption>Original <span class="fig-hint">(paint Keep / Cut here)</span></figcaption>
-              <div class="frame paint-frame" id="source-frame">
+              <figcaption>Original</figcaption>
+              <div class="frame">
                 <img id="source-preview" alt="Uploaded source" />
-                <canvas id="mark-canvas" class="mark-canvas" aria-label="Keep and cut marks"></canvas>
               </div>
             </figure>
             <figure class="preview">
@@ -156,11 +112,11 @@
 
     <footer class="foot">
       <p>
-        Logo mode: paint Keep (faces) / Cut (background), then remove.
-        2× or 4× supersample smooths edges. Photo mode uses on-device AI.
+        Logo mode punches out connected background from the edges — best for
+        brand marks. Photo mode uses on-device AI for complex scenes.
       </p>
     </footer>
 
-    <script type="module" src="./app.js"></script>
+    <script type="module" src="./app.js?v=simple59"></script>
   </body>
 </html>

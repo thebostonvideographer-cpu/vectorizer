@@ -8,7 +8,7 @@ const dist = join(root, "dist");
 rmSync(dist, { recursive: true, force: true });
 mkdirSync(dist, { recursive: true });
 
-for (const file of ["index.html", "styles.css", "app.js", "adobe-express.js", "adobe-config.js"]) {
+for (const file of ["index.html", "styles.css", "app.js"]) {
   cpSync(join(root, file), join(dist, file));
 }
 
@@ -16,7 +16,15 @@ writeFileSync(
   join(dist, "_headers"),
   `/*
   X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
+
+/*.html
+  Cache-Control: no-cache
+
+/app.js
+  Cache-Control: no-cache
+
+/styles.css
+  Cache-Control: no-cache
 `
 );
 

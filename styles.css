@@ -191,13 +191,6 @@ body {
   width: 100%;
 }
 
-.adobe-hint {
-  margin: 0.35rem 0 0;
-  font-size: 0.8rem;
-  color: var(--muted);
-  line-height: 1.35;
-}
-
 .hidden {
   display: none !important;
 }
