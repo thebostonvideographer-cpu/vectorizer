@@ -12,3 +12,5 @@ debug-*.png
 preview-*.jpg
 preview-*.png
 verify-*.png
+
+.wrangler/
